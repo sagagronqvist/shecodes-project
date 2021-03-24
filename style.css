@@ -1,0 +1,99 @@
+body {
+  background: rgb(252, 225, 229);
+}
+
+h1 {
+  color: hotpink;
+  font-size: 80px;
+  text-align: center;
+  margin-bottom: 0;
+}
+h2 {
+  color: hotpink;
+  margin-bottom: 0;
+  margin-top: 10%;
+}
+
+p {
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+#tempButtonC,
+#tempButtonF {
+  background: pink;
+  color: white;
+  border-radius: 5px;
+  border: grey;
+  cursor: pointer;
+}
+
+#tempButtonC:hover,
+#tempButtonF:hover {
+  background: skyblue;
+}
+
+.buttonbox {
+  text-align: right;
+}
+
+.container {
+  width: 40%;
+  border: 1px solid grey;
+  background: white;
+  margin-top: 10px;
+}
+
+.searchBar {
+  text-align: center;
+  margin: 15px;
+}
+
+.content i {
+  color: pink;
+  font-size: 90px;
+}
+
+.forecast {
+  margin-bottom: 25px;
+  margin-top: 30px;
+  text-align: center;
+}
+
+.forecast i {
+  color: pink;
+  font-size: 25px;
+  padding-top: 12px;
+}
+
+.description p {
+  text-align: center;
+  font-size: 19px;
+  line-height: 15px;
+  margin-right: 25px;
+}
+
+#searchedCity {
+  color: hotpink;
+  margin-bottom: 0;
+  margin-top: 10%;
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+#tempNow {
+  color: hotpink;
+  font-size: 80px;
+  text-align: center;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+#description {
+  text-align: center;
+}
