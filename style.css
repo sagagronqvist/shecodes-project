@@ -29,6 +29,11 @@ a:hover {
   color: white;
 }
 
+.row {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
 #currentLocation {
   border: white;
   padding: 4px;
