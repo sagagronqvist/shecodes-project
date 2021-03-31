@@ -25,10 +25,14 @@ switchDate();
 function switchCity(event) {
   event.preventDefault();
   let cityInput = document.querySelector("#searched-input");
+  let cityInputForcast = document.querySelector("#searched-input");
   let apiKey = "3719f2615e58e78c75e87773957510b9";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&units=metric`;
 
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&units=metric`;
   axios.get(`${apiUrl}&appid=${apiKey}`).then(displayTemp);
+
+  let apiForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityInputForcast.value}&units=metric`;
+  axios.get(`${apiForecastUrl}&appid=${apiKey}`).then(displayForecast);
 }
 
   let form = document.querySelector("#search-form");
@@ -48,6 +52,25 @@ function displayTemp (response) {
 
     celTemp = response.data.main.temp;
 
+}
+
+// Forecast
+
+function displayForecast(response) {
+  let getForecast = document.querySelector("#forecast");
+  getForecast.innerHtml = null;
+  let forecast = null;
+
+  for(let index = 0; index < 6; index++) {
+    forecast = response.data.list[index];
+    getForecast.innerHTML =
+    `<div class="row">
+     <div class="col">
+     <p>
+     <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png"/>
+     <div class="weather-forecast-temperature">
+    <strong>${Math.round(forecast.main.temp_max)}</strong> ${Math.round(forecast.main.temp_min)}</div></div></p>`
+  }
 }
 
 //(Temperature Celsius Button)
@@ -100,6 +123,9 @@ let apiUrlWeather = `https://api.openweathermap.org/data/2.5/weather?q=${cityNam
 let apiKeyWeather = "3719f2615e58e78c75e87773957510b9";
 
 axios.get(`${apiUrlWeather}&appid=${apiKeyWeather}`).then(displayTemp);
+
+ let apiForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric`;
+  axios.get(`${apiForecastUrl}&appid=${apiKeyWeather}`).then(displayForecast);
 
 }
 
