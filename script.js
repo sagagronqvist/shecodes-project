@@ -42,9 +42,11 @@ function displayTemp (response) {
 
     document.querySelector("#currentHumidity").innerHTML = response.data.main.humidity;
 
-    document.querySelector("#description").innerHTML = response.data.weather[0].main;
+    document.querySelector("#description").innerHTML = response.data.weather[0].description;
 
     document.querySelector("#currentWind").innerHTML = Math.round(response.data.wind.speed);
+
+    celTemp = response.data.main.temp;
 
 }
 
@@ -53,23 +55,24 @@ function displayTemp (response) {
 function convertToC(event) {
   event.preventDefault();
 
-  let tempText = document.querySelector("#tempNow");
-  let convertingToC = Math.round((62 - 32) / 1.8);
-  tempNow.innerHTML = `${convertingToC}&#8451`; 
+  let tempNow = document.querySelector("#tempNow");
+  tempNow.innerHTML = Math.round(celTemp) + `&#8451`; 
  
 }
 
 let changeC = document.querySelector("#tempButtonC");
 changeC.addEventListener("click", convertToC);
 
+let celTemp = null;
+
 //(Temperature Fahrenheit Button)
 
 function convertToF(event) {
   event.preventDefault();
 
-  let tempText = document.querySelector("#tempNow");
-  let convertingToF = Math.round(17 * 1.8 + 32);
-  tempNow.innerHTML = `${convertingToF}&#8457`; 
+  let tempNow = document.querySelector("#tempNow");
+  let convertingToF = (celTemp * 9) / 5 + 32;
+  tempNow.innerHTML = Math.round(convertingToF)  + `&#8457`; 
  
 }
 
