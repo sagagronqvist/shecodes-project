@@ -29,6 +29,10 @@ a:hover {
   color: white;
 }
 
+li:first-letter {
+  text-transform: capitalize;
+}
+
 .row {
   display: flex;
   flex-wrap: nowrap;
