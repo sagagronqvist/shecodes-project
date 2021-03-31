@@ -50,11 +50,15 @@ function displayTemp (response) {
 
     document.querySelector("#currentWind").innerHTML = Math.round(response.data.wind.speed);
 
+    let iconElement = document.querySelector("#icon");
+    iconElement.setAttribute(
+      "src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+
     celTemp = response.data.main.temp;
 
 }
 
-// Forecast
+// Forecast (Connected to geoCitySwitch and switchCity)
 
 function displayForecast(response) {
   let getForecast = document.querySelector("#forecast");
@@ -64,12 +68,11 @@ function displayForecast(response) {
   for(let index = 0; index < 6; index++) {
     forecast = response.data.list[index];
     getForecast.innerHTML =
-    `<div class="row">
-     <div class="col">
+    `<div class="col">
      <p>
      <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png"/>
      <div class="weather-forecast-temperature">
-    <strong>${Math.round(forecast.main.temp_max)}</strong> ${Math.round(forecast.main.temp_min)}</div></div></p>`
+    <strong>${Math.round(forecast.main.temp_max)}°</strong> ${Math.round(forecast.main.temp_min)}°</div></p>`
   }
 }
 

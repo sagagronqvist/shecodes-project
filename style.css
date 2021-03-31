@@ -109,12 +109,6 @@ input[type="submit" i]:hover {
   text-align: center;
 }
 
-.forecast i {
-  color: pink;
-  font-size: 25px;
-  padding-top: 12px;
-}
-
 .description p {
   font-size: 19px;
   line-height: 15px;
@@ -142,4 +136,11 @@ input[type="submit" i]:hover {
   display: block;
   margin: 0 auto;
   width: 35%;
+}
+
+.weather-forecast-temperature {
+}
+
+#mainIcon img {
+  width: 300px;
 }
