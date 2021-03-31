@@ -42,7 +42,7 @@ li:first-letter {
   border: white;
   padding: 4px;
   border-radius: 5px;
-  background: pink;
+  background: hotpink;
   color: white;
 }
 
@@ -55,7 +55,7 @@ input[type="submit" i] {
   border: white;
   padding: 4px;
   border-radius: 5px;
-  background: pink;
+  background: hotpink;
   color: white;
 }
 
@@ -70,7 +70,7 @@ input[type="submit" i]:hover {
 
 #tempButtonC,
 #tempButtonF {
-  background: pink;
+  background: hotpink;
   color: white;
   border-radius: 5px;
   border: grey;
