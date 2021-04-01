@@ -60,21 +60,30 @@ function displayTemp (response) {
 
 // Forecast (Connected to geoCitySwitch and switchCity)
 
-function displayForecast(response) {
-  let getForecast = document.querySelector("#forecast");
-  getForecast.innerHtml = null;
-  let forecast = null;
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
 
-  for(let index = 0; index < 6; index++) {
-    forecast = response.data.list[index];
-    getForecast.innerHTML =
-    `<div class="col">
-     <p>
-     <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png"/>
-     <div class="weather-forecast-temperature">
-    <strong>${Math.round(forecast.main.temp_max)}°</strong> ${Math.round(forecast.main.temp_min)}°</div></p>`
-  }
-}
+  let forecastHTML = `<div class="row">`;
+  let days = ["Thu", "Fri", "Sat", "Sun", "Mon", "Tue"];
+  days.forEach(function (day) {
+    forecastHTML = forecastHTML + 
+    `
+    <div class="col-2">
+     <div class="weather-forecast-date">${day}</div>
+        <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="" width="42" />
+        <div class="weather-forecast-temperatures">
+          <span class="weather-forecast-temperature-max">18</span>
+          <span class="weather-forecast-temperature-min">16</span>
+          </div>
+          </div>`;
+
+                 });
+
+                forecastHTML = forecastHTML + "</div>";
+                forecastElement.innerHTML = forecastHTML;
+
+                }
+
 
 //(Temperature Celsius Button)
 
