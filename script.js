@@ -1,4 +1,4 @@
-// (Getting the Current Date and Time)
+// Getting the Current Date and Time
 
 function switchDate() {
   let dateToday = document.querySelector("li #currentDate p");
@@ -20,7 +20,7 @@ let day = days[date.getDay()];
 
 switchDate();
 
-// (City Input Displayed and Temperature Change)
+// City Input Displayed and Temperature Change
 
 function switchCity(event) {
   event.preventDefault();
@@ -35,11 +35,7 @@ function switchCity(event) {
   let form = document.querySelector("#search-form");
   form.addEventListener("submit", switchCity);
 
-  function getForecast(coordinates) {
-  let apiKey = "3719f2615e58e78c75e87773957510b9";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayForecast);
-  }
+   
 
 function displayTemp (response) {
 
@@ -59,36 +55,55 @@ function displayTemp (response) {
 
     celTemp = response.data.main.temp;
 
+    getForecast(response.data.coord);
+
 }
 
-// Forecast (Connected to geoCitySwitch and switchCity)
+// Forecast Display
+
+ function getForecast(coordinates) {
+  let apiKey = "3719f2615e58e78c75e87773957510b9";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+
+    }
+
+ function formatDay(timestamp) {
+    let date = new Date(timestamp * 1000);
+    let day = date.getDay();
+    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+    return days[day]; }
 
 function displayForecast(response) {
+  let forecast = response.data.daily;
+
+  console.log(forecast);
+
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row">`;
-  let days = ["Thu", "Fri", "Sat", "Sun", "Mon", "Tue"];
-  days.forEach(function (day) {
+  forecast.forEach(function (forecastDay, index) {
+    if(index < 5) {
     forecastHTML = forecastHTML + 
     `
-    <div class="col-2">
-     <div class="weather-forecast-date">${day}</div>
-        <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="" width="42" />
+    <div class="col">
+     <div class="weather-forecast-date">${formatDay(forecastDay.dt)}</div>
+        <img src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="" width="70" />
         <div class="weather-forecast-temperatures">
-          <span class="weather-forecast-temperature-max">18</span>
-          <span class="weather-forecast-temperature-min">16</span>
-          </div>
-          </div>`;
+          <span class="weather-forecast-temperature-max"><strong>${Math.round(forecastDay.temp.max)}°</strong></span>
+          <span class="weather-forecast-temperature-min">${Math.round(forecastDay.temp.min)}°</span>
+          </div></div>`;
+    }
+     });
 
-                 });
+      forecastHTML = forecastHTML + "</div>";
+      forecastElement.innerHTML = forecastHTML;
 
-                forecastHTML = forecastHTML + "</div>";
-                forecastElement.innerHTML = forecastHTML;
-
-                }
+      }
 
 
-//(Temperature Celsius Button)
+//Temperature Celsius Button
 
 function convertToC(event) {
   event.preventDefault();
@@ -117,7 +132,7 @@ function convertToF(event) {
 let changeF = document.querySelector("#tempButtonF");
 changeF.addEventListener("click", convertToF);
 
-// (Current Location Button and Temperature Change)
+// Current Location Button and Temperature Change
 
 function showCurrentLocation(position) {
 
@@ -138,9 +153,6 @@ let apiUrlWeather = `https://api.openweathermap.org/data/2.5/weather?q=${cityNam
 let apiKeyWeather = "3719f2615e58e78c75e87773957510b9";
 
 axios.get(`${apiUrlWeather}&appid=${apiKeyWeather}`).then(displayTemp);
-
- let apiForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric`;
-  axios.get(`${apiForecastUrl}&appid=${apiKeyWeather}`).then(displayForecast);
 
 }
 
